@@ -355,7 +355,12 @@ Exp* Parser::parseFactor() {
     return new NumberExp(stoi(previous->lexema));
   }
   if(match(Token::FALSE) || match(Token::TRUE)){
-    return new BoolExp(previous->lexema);
+    if(previous->lexema=="false"){
+      return new BoolExp(false);
+    }else{
+      return new BoolExp(true);
+    }
+    
   }
   if (match(Token::ID)) {
     return new IdExp(previous->lexema);

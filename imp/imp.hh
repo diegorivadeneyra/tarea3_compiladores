@@ -66,8 +66,8 @@ public:
 
 class BoolExp : public Exp{
   public:
-  string boleano;
-  BoolExp (string b);
+  bool boleano;
+  BoolExp (bool b);
   int accept(ImpVisitor* v);
   ImpType accept(TypeVisitor* v);
   ~BoolExp();
