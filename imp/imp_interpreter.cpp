@@ -136,11 +136,11 @@ int ImpInterpreter::visit(IdExp* e) {
   */
 }
 
-int ImpInterpreter::visit(BoolExp* e) {
+bool ImpInterpreter::visit(BoolExp* e) {
   if(e->booleano == "true")
-    return 1;
+    return true;
   else
-    return 0;
+    return false;
 }
 
 int ImpInterpreter::visit(ParenthExp* ep) {

@@ -20,7 +20,7 @@ public:
   virtual int visit(NumberExp* e) = 0;
   virtual int visit(IdExp* e) = 0;
   virtual int visit(ParenthExp* e) = 0;
-  virtual int visit(BoolExp* e) = 0;
+  virtual bool visit(BoolExp* e) = 0;
   virtual int visit(CondExp* e) = 0;
   
 };

@@ -128,7 +128,7 @@ int ImpPrinter::visit(CondExp* e) {
   return 0;
 }
 
-int ImpPrinter::visit(BoolExp* e) {
+bool ImpPrinter::visit(BoolExp* e) {
   cout << e->booleano;
   return 0;
 }

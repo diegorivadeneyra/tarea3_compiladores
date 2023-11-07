@@ -1,0 +1,3 @@
+var bool x;
+x=true;
+print(x)
