@@ -88,22 +88,34 @@ void ImpTypeChecker::visit(WhileStatement* s) {
  return;
 }
 
+void ImpTypeChecker::visit(ForStatement* s) {
+  if (!s->e1->accept(this).match(inttype) or !s->e2->accept(this).match(inttype)) {
+    cout << "Tipos en bucle 'for' deben ser int" << endl;
+    exit(0);
+  }
+  env.add_var(s->iterator, inttype);
+  s->body->accept(this);
+  return;
+}
+
 ImpType ImpTypeChecker::visit(BinaryExp* e) {
+
   ImpType t1 = e->left->accept(this);
   ImpType t2 = e->right->accept(this);
-  if (!t1.match(inttype) || !t2.match(inttype)) {
+  if (!t1.match(t2)) {
     cout << "Tipos en BinExp deben de ser int" << endl;
     exit(0);
   }
   ImpType result;
   switch(e->op) {
-  case PLUS:   case MINUS:
-  case MULT:   case DIV:  case EXP:
-    result = inttype;
-    break;
-  case LT: case LTEQ: case EQ:
-    result = booltype;
-    break;
+    case PLUS: case MINUS: 
+    case MULT: case DIV: case EXP:
+      result = inttype;
+      break;
+    case LT: case LTEQ: case EQ:
+    case AND: case OR:
+      result = booltype;
+      break;
   }
   return result;
 }
@@ -143,4 +155,5 @@ ImpType ImpTypeChecker::visit(CondExp* e) {
   }
   return ttype;
 }
+
 

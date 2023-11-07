@@ -1,0 +1,7 @@
+var int n, result;
+n = 2;
+result = 1;
+for x : n, 1 do
+    result = result * x
+endfor;
+print(result)

@@ -14,6 +14,7 @@ public:
   virtual int visit(PrintStatement* e) = 0;
   virtual int visit(IfStatement* e) = 0;
   virtual int visit(WhileStatement* e) = 0;
+  virtual int visit(ForStatement* e) = 0;
   
   virtual int visit(BinaryExp* e) = 0;
   virtual int visit(NumberExp* e) = 0;
@@ -21,6 +22,7 @@ public:
   virtual int visit(ParenthExp* e) = 0;
   virtual int visit(BoolExp* e) = 0;
   virtual int visit(CondExp* e) = 0;
+  
 };
 
 

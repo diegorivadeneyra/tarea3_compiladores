@@ -79,6 +79,19 @@ int ImpInterpreter::visit(WhileStatement* s) {
  return 0;
 }
 
+int ImpInterpreter::visit(ForStatement* s) {
+  int begin = s->e1->accept(this);
+  int end = s->e2->accept(this);
+  int step = (begin <= end) ? 1 : -1;
+  env.add_var(s->iterator, begin);
+  for (int i = begin; (begin <= end) ? (i <= end) : (i >= end); i += step) {
+    s->body->accept(this);
+    env.update(s->iterator, i + step);
+  }
+
+  return 0;
+}
+
 int ImpInterpreter::visit(BinaryExp* e) {
   int v1 = e->left->accept(this);
   int v2 = e->right->accept(this);
@@ -95,6 +108,8 @@ int ImpInterpreter::visit(BinaryExp* e) {
   case LT: result = (v1 < v2) ? 1 : 0; break;
   case LTEQ: result = (v1 <= v2) ? 1: 0; break;
   case EQ: result = (v1 == v2) ? 1 : 0; break;
+  case AND: result = v1 && v2; break;
+  case OR: result = v1 || v2; break;
   }
   return result;
 }
@@ -122,13 +137,10 @@ int ImpInterpreter::visit(IdExp* e) {
 }
 
 int ImpInterpreter::visit(BoolExp* e) {
-  if (env.check(e->boleano))
-    return env.lookup(e->boleano);
-  else {
-    cout << "Variable indefinida: " << e->boleano << endl;
-    exit(0);
-  }
-  return 0;
+  if(e->booleano == "true")
+    return 1;
+  else
+    return 0;
 }
 
 int ImpInterpreter::visit(ParenthExp* ep) {
@@ -141,3 +153,4 @@ int ImpInterpreter::visit(CondExp* e) {
   else
     return e->etrue->accept(this);
 }
+
