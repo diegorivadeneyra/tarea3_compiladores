@@ -7,3 +7,5 @@ Integrantes:
  - Lizarraga, Sebastian   (202010297)
 
 #Ejemplos
+
+- Carpeta de ejemplos posee los ejemplos para las diferentes implementaiones 
